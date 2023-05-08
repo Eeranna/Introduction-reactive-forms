@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Add Employee</h3>
+                <div class="container">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form [formGroup]="empForm" >
+                            <div class="mb-3">
+                                <label for="name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" formControlName="firstName" >
+                                <span *ngIf="empForm.get('firstName')?.errors?.['required'] && empForm.get('firstName')?.touched" style="color:red" >
+                                    Please enter name.
+                                </span>
+                                <span style="color: red;" *ngIf="empForm.get('firstName')?.errors?.['minlength'] ||
+                                empForm.get('firstName')?.errors?.['maxlength']">
+                                    Full Name must be greater than 2 characters and less than 10 characters
+                                </span>
+                                <br>
+                                {{ empForm.get('firstName')?.errors | json  }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" formControlName="lastName" >
+                            </div>
+                            <div formGroupName="address" >
+                                <div class="mb-3">
+                                    <label for="city" class="form-label">city</label>
+                                    <input type="text" class="form-control" formControlName="city" >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="state" class="form-label">state</label>
+                                    <input type="text" class="form-control" formControlName="state" >
+                                </div>
+                            </div>
+                            <button type="button" (click)="getFromGroupValues()" class="btn btn-primary">Submit</button>
+                            <button (click)="setValue()" >setValue</button>
+                           {{empForm.value | json}}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container" >
+    <div class="col-md-12" >
+        <label for="name" class="form-label">First Name</label>
+        <input type="text" class="form-control" name="firstName" [formControl]="name" >
+        valid --  {{ name.valid }} <br>
+        touched --  {{ name.touched }} <br>
+        value -- {{ name.value }}- <br>
+
+        <button (click)="getValue()" >getValue</button>
+        <button (click)="setValue()" >setValue</button>
+    </div>
+</div> -->
